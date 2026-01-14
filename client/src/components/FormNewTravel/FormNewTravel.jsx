@@ -14,7 +14,7 @@ export const FormNewTravel = ({setShowFormNewTravel}) => {
   const [newTravel, setNewTravel] = useState(initialValues);
   const [pictures, setPictures] = useState();
 
-  const {token} = useContext(AuthContext)
+  const {token, travels, setTravels, user_id} = useContext(AuthContext)
 
   const handleChange = (e) => {
     const {name, value} = e.target;
@@ -38,8 +38,12 @@ export const FormNewTravel = ({setShowFormNewTravel}) => {
           }
         }
         const res = await fetchData('travel/newTravel', 'POST', newFormData, token);
+        setTravels([...travels, {
+                              ...newTravel, 
+                              user_id:user_id,
+                              travel_id: res.data.travelId}])
         console.log(res);
-        
+        setShowFormNewTravel(false)
       }catch(error){
         console.log(error)
       }

@@ -44,7 +44,11 @@ class UserController {
     const {user_id} = req;
     try{
       const result = await userDal.userByToken(user_id);
-      res.status(200).json({message:'ok', user: result[0]})
+
+      res.status(200).json({
+            message:'ok', 
+            user: result.user, 
+            travels:result.travels})
     }catch(error){
       res.status(500).json(error)
     }

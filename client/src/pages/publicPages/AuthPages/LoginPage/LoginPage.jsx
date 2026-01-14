@@ -14,7 +14,7 @@ const LoginPage = () => {
   const [login, setLogin] = useState(initialValue);
   const [errorMsg, setErrorMsg] = useState('')
 
-  const {setUser, setToken} = useContext(AuthContext);
+  const {setUser, setToken, setTravels} = useContext(AuthContext);
 
   const navigate = useNavigate(); 
 
@@ -34,6 +34,7 @@ const LoginPage = () => {
       console.log(resUser);
       
       setUser(resUser.data.user);
+      setTravels(resUser.data.travels)
       localStorage.setItem('token', token)
       setToken(token);
 

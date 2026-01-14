@@ -6,6 +6,7 @@ export const AuthContextProvider = ({children}) => {
 
   const [user, setUser] = useState()
   const [token, setToken] = useState()
+  const [travels, setTravels] = useState()
   console.log('ssssssssssssssssssssssss',token);
   
   useEffect(()=>{
@@ -17,7 +18,10 @@ export const AuthContextProvider = ({children}) => {
         try{
           const resUser = await fetchData('user/userByToken', 'GET', null, tokenLS)
           setUser(resUser.data.user);
-          setToken(tokenLS)
+          setTravels(resUser.data.travels);
+          setToken(tokenLS);
+          
+          
         }catch(error){
           console.log(error)
         }
@@ -39,7 +43,9 @@ export const AuthContextProvider = ({children}) => {
                                 setUser,
                                 token,
                                 setToken,
-                                logOut
+                                logOut,
+                                setTravels,
+                                travels
                                 }}>
         {children}
       </AuthContext.Provider>

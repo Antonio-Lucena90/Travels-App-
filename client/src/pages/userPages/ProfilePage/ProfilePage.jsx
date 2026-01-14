@@ -4,6 +4,7 @@ import { AuthContext } from '../../../contexts/AuthContext/AuthContext';
 import { useNavigate } from 'react-router';
 import { FormNewTravel } from '../../../components/FormNewTravel/FormNewTravel';
 import './profilePage.css'
+import { UserTravelsGallery } from '../../../components/UserTravelsGallery/UserTravelsGallery';
 
 const ProfilePage = () => {
   const [showFormNewTravel, setShowFormNewTravel] = useState(false)
@@ -23,7 +24,7 @@ const ProfilePage = () => {
               <p>Apellido: {user.lastname}</p>
               <p>Email: {user.email}</p>
               <p>Teléfono: {user.phone}</p>
-              <p>Fecha de Nacimiento: {user.birth_date.split('-').reverse().join('-')}</p>
+              <p>Fecha de Nacimiento: {user.birth_date?.split('-').reverse().join('-')}</p>
             </div>
           </Col>
           <Col>
@@ -51,7 +52,14 @@ const ProfilePage = () => {
           </Col>
         </Row>
         <Row>
-
+          
+        </Row>
+      </Container>
+      <Container>
+        <Row>
+          <Col>
+            <UserTravelsGallery/>
+          </Col>
         </Row>
       </Container>
     </section>
