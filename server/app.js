@@ -7,6 +7,7 @@ import { fileURLToPath } from 'url';
 import cors from 'cors'
 import userRouter from './modules/user/user.routes.js'
 import travelRouter from './modules/travel/travel.routes.js'
+import adminRouter from './modules/admin/admin.routes.js'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -21,6 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/user', userRouter)
 app.use('/api/travel', travelRouter)
+app.use('/api/admin', adminRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

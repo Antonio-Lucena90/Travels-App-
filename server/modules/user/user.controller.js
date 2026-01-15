@@ -70,6 +70,25 @@ class UserController {
       res.status(500).json(error)
     }
   }
+
+  allUserTravels = async(req, res)=>{
+     try{
+      let result = await userDal.allUserTravels()
+      res.status(200).json({result})
+    }catch(error){
+      res.status(500).json(error)
+    }
+  }
+
+  userById = async(req, res) => {
+    const {id} = req.params
+      try{
+      let [result] = await userDal.userById([id])
+      res.status(200).json({result})
+    }catch(error){
+      res.status(500).json(error)
+  }
+}
 }
 
 export default new UserController(); 

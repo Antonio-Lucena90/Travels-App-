@@ -49,10 +49,35 @@
   }
 
   addPictures = async(files, travel_id)=>{
+    const connection = await dbPool.getConnection();
     try{  
-      let sql = ''
+      await connection.beginTransaction();
+      //averiguar cual es el image_id mas alto
+      let sql = 'SELECT IFNULL(MAX(image_id), 0) AS max_id FROM gallery WHERE travel_id = ?'
+
+      let [result] = await connection.query(sql, [travel_id]);
+      let maxId = result[0].max_id;
+      
+      //bucle para insertar las fotos
+
+      files.forEach(async(elem)=>{
+        maxId++;
+        let sqlImages = 'INSERT INTO gallery (travel_id, image_id, file) VALUES (?,?,?)'
+        let values = [travel_id, maxId, elem.filename]; 
+        await connection.query(sqlImages, values)
+      })
+
+      let sqlUpdateFiles = 'SELECT * FROM gallery WHERE travel_id = ? AND image_is_deleted = 0'
+      let [updatePics] = await connection.query(sqlUpdateFiles, [travel_id])
+      await connection.commit();
+      return updatePics;
     }catch(error){
+      await connection.rollback();
       throw error;
+    }finally{
+      if(connection){
+        connection.release();
+      }
     }
   }
 
@@ -70,6 +95,24 @@
       let sql = 'UPDATE travel LEFT JOIN gallery ON travel.travel_id = gallery.travel_id set travel.travel_is_deleted = 1, gallery.image_is_deleted = 1 WHERE travel.travel_id = ?'
       await excuteQuery(sql, travel_id);
       
+    }catch(error){
+      throw error
+    }
+  }
+
+  editTravel = async(values)=>{
+    try{
+      let sql = 'UPDATE travel SET title=?, country=?, city=?, description=? WHERE travel_id = ?'
+      await excuteQuery(sql, values)
+    }catch(error){
+      throw error
+    }
+  }
+
+  delImage = async(values)=>{
+    try{
+      let sql = 'DELETE FROM gallery WHERE image_id = ? AND travel_id = ?'
+      await excuteQuery(sql, values)
     }catch(error){
       throw error
     }

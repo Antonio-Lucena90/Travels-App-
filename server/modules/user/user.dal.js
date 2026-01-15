@@ -75,5 +75,33 @@ class UserDal{
       throw error;
     }
   }
+
+  allUserTravels = async() =>{
+     try{
+      let sql = ` SELECT u.user_id, u.name, u.lastname, u.avatar,
+                        t.title, t.city, t.travel_id, MIN(g.file) AS file
+                        FROM user AS u JOIN travel AS t    
+                        ON u.user_id = t.user_id JOIN gallery AS g 
+                        ON t.travel_id = g.travel_id
+                        WHERE t.travel_is_deleted = 0
+                        AND u.user_is_deleted = 0
+                        AND g.image_is_deleted = 0
+                        GROUP BY t.travel_id, u.user_id`
+     let result = await excuteQuery(sql);
+     console.log(result);
+     return result 
+    }catch(error){
+      throw error;
+    }
+  }
+
+  userById = async(id)=>{
+    try{
+      let sql = 'SELECT name, lastname, email, avatar FROM user WHERE user_id = ?';
+     return await excuteQuery(sql, id); 
+    }catch(error){
+      throw error;
+    }
+  }
 }
 export default new UserDal();

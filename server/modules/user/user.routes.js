@@ -13,4 +13,8 @@ router.get('/userByToken', verifyToken, userController.userByToken)
 
 router.put('/editUser', verifyToken, uploadImage('users'), userController.editUser);
 
+router.get('/allUserTravels', verifyToken, userController.allUserTravels);
+
+router.get('/userById/:id', verifyToken, userController.userById);
+
 export default router; 
