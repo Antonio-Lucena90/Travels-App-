@@ -18,7 +18,7 @@ export const NavbarUser = () => {
           </Nav>
           <div className='d-flex gap-2'>
             <div className='d-flex gap-2 align-items-center'>
-              <p className='m-0'>{user?.name} {user.lastname && user.lastname}</p>
+              <p className='m-0'>{user?.name} {user?.lastname && user.lastname}</p>
               {user?.avatar ? <img className='avatar-img'src={`http://localhost:4000/images/users/${user.avatar}`} onClick={()=>navigate('/profile')}/>:
               <div 
               onClick={()=>navigate('/profile')}

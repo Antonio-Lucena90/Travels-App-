@@ -17,7 +17,7 @@ export const PublicRoutes = () => {
 
   return (
     <div>
-      {!user &&<Outlet/>}
+      <Outlet/>
     </div>
   )
 }

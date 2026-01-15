@@ -20,15 +20,15 @@ const ProfilePage = () => {
             <div className="d-flex flex-column gap-2">
               <h2>Tu Perfil</h2>
               <hr />
-              <p>Nombre: {user.name}</p>
-              <p>Apellido: {user.lastname}</p>
-              <p>Email: {user.email}</p>
-              <p>Teléfono: {user.phone}</p>
-              <p>Fecha de Nacimiento: {user.birth_date?.split('-').reverse().join('-')}</p>
+              <p>Nombre: {user?.name}</p>
+              <p>Apellido: {user?.lastname}</p>
+              <p>Email: {user?.email}</p>
+              <p>Teléfono: {user?.phone}</p>
+              <p>Fecha de Nacimiento: {user?.birth_date?.split('-').reverse().join('-')}</p>
             </div>
           </Col>
           <Col>
-            <img className='image-profil' src={`${import.meta.env.VITE_SERVER_IMAGES}/users/${user.avatar}`} alt="" />
+            <img className='image-profil' src={`${import.meta.env.VITE_SERVER_IMAGES}/users/${user?.avatar}`} alt="" />
           </Col>
         </Row>
         <Row>

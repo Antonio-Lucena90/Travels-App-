@@ -9,7 +9,7 @@ export const PrivateRoutes = ({user, requiredType}) => {
 
   return (
     <div>
-      {(user?.type === requiredType) &&<Outlet/>}
+      <Outlet/>
     </div>
   )
 }

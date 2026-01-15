@@ -14,11 +14,14 @@ import { UserLayout } from '../layouts/UserLayout'
 const AllUserPage = lazy(()=>import('../pages/userPages/AllUsersPage/AllUsersPage'))
 const ProfilePage = lazy(()=>import('../pages/userPages/ProfilePage/ProfilePage'))
 const EditUserPage = lazy(()=>import('../pages/userPages/EditUserPage/EditUserPage'))
+const OneUserPage = lazy(()=>import('../pages/userPages/OneUserPage/OneUserPage'))
+const OneTravelPage = lazy(()=>import('../pages/userPages/OneTravelPage/OneTravelPage'))
 
 import { AdminLayout } from '../layouts/AdminLayout'
 import { AuthContext } from '../contexts/AuthContext/AuthContext'
 
 const AdminDashboard = lazy(()=>import('../pages/AdminPages/AdminDashboard/AdminDashboard'))
+const AdminUser = lazy(()=>import('../pages/AdminPages/AdmiUser/AdminUser'))
 
 export const AppRoutes = () => {
   const {user} = useContext(AuthContext);
@@ -41,9 +44,11 @@ export const AppRoutes = () => {
                               user={user} 
                               requiredType={1}/>}>
             <Route element={<UserLayout/>}>
-              <Route path='allUsers' element={<AllUserPage/>}/>
-              <Route path='profile' element={<ProfilePage/>}/>
-              <Route path='editUser' element={<EditUserPage/>}/>
+              <Route path='/allUsers' element={<AllUserPage/>}/>
+              <Route path='/profile' element={<ProfilePage/>}/>
+              <Route path='/editUser' element={<EditUserPage/>}/>
+              <Route path='/oneUser/:user_id' element={<OneUserPage/>}/>
+              <Route path='/oneTravel/:travel_id' element={<OneTravelPage/>}/>
             </Route>
           </Route>
 
@@ -53,6 +58,7 @@ export const AppRoutes = () => {
                               requiredType={2}/>}>
             <Route element={<AdminLayout/>}>
               <Route path='/admin' element={<AdminDashboard/>}/>
+              <Route path='/adminUser' element={<AdminUser/>}/>
             </Route>
           </Route>
 
