@@ -103,5 +103,24 @@ class UserDal{
       throw error;
     }
   }
+
+  insertComment = async(value)=>{
+    try{
+      let sql = 'INSERT INTO comments (comment,user_id_dest, user_id_rem) VALUES (?,?,?)'
+      await excuteQuery(sql, value)
+    }catch(error){
+      throw error
+    }
+  }
+
+  getComments = async(id)=>{
+    try{
+      let sql = 'SELECT * FROM comments WHERE user_id_dest = ?'
+      let result = await excuteQuery(sql, id)
+      return result
+    }catch(error){
+      throw error
+    }
+  } 
 }
 export default new UserDal();

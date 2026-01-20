@@ -17,4 +17,9 @@ router.get('/allUserTravels', verifyToken, userController.allUserTravels);
 
 router.get('/userById/:id', verifyToken, userController.userById);
 
+router.post('/insertComment/:id/:id2', verifyToken, userController.insertComment)
+
+router.get('/getComments/:id', verifyToken, userController.getComments); 
+
+
 export default router; 
